@@ -1,23 +1,633 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+<style>
+    html, body, div, span, h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, label, input, select, button, table, thead, tbody, tr, th, td, blockquote, pre, a, span {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #334155;
+      line-height: 1.8;
+      background-color: #f3f6f9;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 40px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+    h1 {
+      font-size: 2.3em;
+      color: #1e293b;
+      border-bottom: 3px solid #6366f1;
+      padding-bottom: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    h2 {
+      font-size: 1.6em;
+      color: #1e3a8a;
+      margin-top: 2.5em;
+      border-left: 6px solid #6366f1;
+      padding-left: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+    h3 {
+      font-size: 1.3em;
+      color: #2563eb;
+      margin-top: 1.8em;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    h4 {
+      font-size: 1.1em;
+      color: #1e293b;
+      margin-top: 1.2em;
+      font-weight: 600;
+    }
+    p {
+      margin-bottom: 1.5em;
+      text-align: justify;
+      font-size: 1.05em;
+    }
+    ul, ol {
+      margin-bottom: 1.5em;
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 0.8em;
+      font-size: 1.02em;
+    }
+    .highlight {
+      background-color: #eff6ff;
+      padding: 24px;
+      border-radius: 10px;
+      border-left: 6px solid #3b82f6;
+      margin: 25px 0;
+      color: #1e40af;
+      font-weight: 500;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95em;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+    }
+    table th, table td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    table th {
+      background-color: #f8fafc;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+    table tr:hover {
+      background-color: #f1f5f9;
+    }
+    .form-section {
+      background-color: #f8fafc;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 30px 0;
+      border: 1px solid #e2e8f0;
+    }
+    .form-section input[type="text"], .form-section input[type="number"], .form-section select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 1em;
+      background-color: #ffffff;
+      color: #334155;
+    }
+    .form-section label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #475569;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 14px 30px;
+      background-color: #6366f1;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-weight: 700;
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .cta-button:hover {
+      background-color: #4f46e5;
+    }
+    .result-box {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: #f0fdf4;
+      border-left: 6px solid #22c55e;
+      border-radius: 8px;
+      color: #166534;
+    }
+    .graph-container {
+      margin: 25px 0;
+      padding: 25px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background-color: #ffffff;
+    }
+    .bar-wrapper {
+      margin-bottom: 15px;
+    }
+    .bar-label {
+      font-size: 0.95em;
+      color: #475569;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .bar-bg {
+      background-color: #f1f5f9;
+      border-radius: 4px;
+      height: 16px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background-color: #6366f1;
+      border-radius: 4px;
+      transition: width 1s ease-in-out;
+    }
+    .nav-links {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #f1f5f9;
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .nav-links a {
+      color: #475569;
+      text-decoration: none;
+      margin: 8px 15px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #6366f1;
+      text-decoration: underline;
+    }
+    .external-links {
+      margin-top: 40px;
+      border-top: 2px solid #e2e8f0;
+      padding-top: 25px;
+    }
+    .external-links p {
+      font-size: 0.95em;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    .external-links a {
+      color: #4f46e5;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 0.95em;
+      font-weight: 600;
+    }
+    .external-links a:hover {
+      text-decoration: underline;
+    }
+    .json-ld-placeholder {
+      display: none;
+    }
+  </style>
+
+  <script type="application/ld+json" class="json-ld-placeholder">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "2026년식 포드 머스탱 7세대 공식 신차 가격은 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026년 국내 수입되는 포드 머스탱 7세대의 공식 신차 가격은 2.3 에코부스트 프리미엄 쿠페가 6010만 원, 2.3 에코부스트 프리미엄 컨버터블이 6720만 원입니다. 5.0 GT 프리미엄 쿠페 스탠다드는 8010만 원, 5.0 GT 프리미엄 컨버터블 스탠다드는 8630만 원으로 책정되어 판매 중입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "머스탱 2.3 에코부스트와 5.0 GT 모델의 유지비 차이점과 연간 세금은 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "배기량 차이에 따라 자동차세 차이가 매우 큽니다. 2.3 에코부스트는 연간 자동차세가 약 58만 원 선인 반면, 5.0 GT는 배기량이 5038cc에 달해 연간 자동차세만 약 130만 원에 이릅니다. 유류비 또한 복합 연비 차이로 인해 연간 2만km 주행 기준 수백만 원의 유지비 금액 격차가 발생하게 됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "머스탱을 가장 저렴한곳에서 프로모션 할인을 적용받아 견적을 받는 방법은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "공식 딜러 프로모션 외에도 비공식 전문 에이전시 업체의 현금지원 및 지원금 혜택을 비교해야 합니다. 또한 금리 비교 어플 및 웹사이트를 적극 활용하여 다이렉트 할부 요금제나 리스 상품을 설계받고 사은품이나 백화점 상품권 혜택이 가장 큰 좌표를 찾아 계약을 진행하는 것이 추천됩니다."
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>2026년 포드 머스탱 가격표 및 신차 견적 유지비 장단점 비교 총정리</h1>
+
+    <p>아메리칸 스포츠카의 자존심이자 독보적인 헤리티지를 자랑하는 포드 머스탱이 7세대 풀체인지 올뉴머스탱 모델을 통해 국내 수입차 시장에서 엄청난 존재감을 나타내고 있습니다. 수많은 자동차 마니아들이 드림카로 꼽는 2026년식 포드 머스탱 7세대 라인업의 세부적인 신차가격 정보와 트림별 차이점, 구매 시 추가되는 세금 및 제반 비용 계산, 그리고 합리적인 견적 설계 요령까지 심도 있게 다뤄보겠습니다. 포드 머스탱 신차 가입을 고려 중이시라면 본 가이드가 완벽한 나침반이 될 것입니다.</p>
+
+    <ol>
+      <li><strong>2026년식 포드 머스탱 트림별 가격표 및 요금 분석</strong>: 신차가격, 부가세, 개소세 기준 상세 정리.</li>
+      <li><strong>7세대 올뉴머스탱 주요 제원 및 스펙 차이점</strong>: 2.3 에코부스트 프리미엄과 5.0 GT 프리미엄 스펙 비교.</li>
+      <li><strong>월 유지비 및 연간 자동차세 상세 계산</strong>: 복합 연비 데이터와 배기량 기준 세액 시뮬레이션.</li>
+      <li><strong>일시불 vs 리스 vs 장기렌트 요금제 장단점</strong>: 개인 및 사업자를 위한 절세 혜택과 비교 분석.</li>
+      <li><strong>커뮤니티 내돈내산 출고 후기 분석</strong>: 디시, 보배드림, 펨코, 에펨코리아 차주 피드백 요약.</li>
+      <li><strong>프로모션 할인 및 최저가 성지 매장 좌표 찾기</strong>: 지원금, 사은품 및 추가 현금지원 혜택 극대화 팁.</li>
+    </ol>
+
+    <div class="nav-links">
+      <a href="#section1">1. 신차가격 및 라인업</a>
+      <a href="#section2">2. 파워트레인 및 제원</a>
+      <a href="#section3">3. 유지비 및 세금 비교</a>
+      <a href="#section4">4. 스마트 금융 계산기</a>
+      <a href="#section5">5. 리스 vs 장기렌트 비교</a>
+      <a href="#section6">6. 커뮤니티 반응 및 결론</a>
+    </div>
+
+    <h2 id="section1">1. 2026년식 포드 머스탱 트림별 가격표 및 요금 분석</h2>
+
+    <p>아메리칸 머슬카 헤리티지를 온전히 계승하며 현대적인 미래지향적 레이아웃으로 무장한 포드 머스탱 7세대는 출시 이후 수입 스포츠카 판매 순위에서 압도적인 상위권을 유지하고 있습니다. 포드코리아 공식 수입을 통해 국내에 정식 출시된 라인업은 2.3L EcoBoost Premium 터보 모델과 5.0L GT Premium 자연흡기 모델로 나뉘며, 각각 세련된 쿠페 바디와 오픈 에어링을 즐길 수 있는 컨버터블 바디의 두 가지 종류로 구성되어 고객의 취향과 라이프스타일에 맞게 설계되어 있습니다.</p>
+
+    <p>2026년 기준으로 공식 공지된 머스탱 신차가격 및 기본 출고 금액은 개별소비세 환원 기준율을 철저히 반영하여 아래와 같이 책정되었습니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>모델 및 세부 트림 종류</th>
+          <th>엔진 및 변속기 형식</th>
+          <th>공식 가격 (개소세 반영)</th>
+          <th>취등록세 예상 금액 (7%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2.3 에코부스트 프리미엄 쿠페</td>
+          <td>2.3L 에코부스트 터보 / 10단 자동</td>
+          <td>60,100,000 원</td>
+          <td>약 4,207,000 원</td>
+          <td>60,100,000 원</td>
+        </tr>
+        <tr>
+          <td>2.3 에코부스트 프리미엄 컨버터블</td>
+          <td>2.3L 에코부스트 터보 / 10단 자동</td>
+          <td>67,200,000 원</td>
+          <td>약 4,704,000 원</td>
+          <td>67,200,000 원</td>
+        </tr>
+        <tr>
+          <td>5.0 GT 프리미엄 쿠페 스탠다드</td>
+          <td>5.0L V8 자연흡기 코요테 / 10단 자동</td>
+          <td>80,100,000 원</td>
+          <td>약 5,607,000 원</td>
+          <td>80,100,000 원</td>
+        </tr>
+        <tr>
+          <td>5.0 GT 프리미엄 컨버터블 스탠다드</td>
+          <td>5.0L V8 자연흡기 코요테 / 10단 자동</td>
+          <td>86,300,000 원</td>
+          <td>약 6,041,000 원</td>
+          <td>86,300,000 원</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <strong>머스탱 특별 모델 정보 및 글로벌 스펙:</strong> <br>
+      해외 시장에서 엄청난 인기를 모으고 있는 초고성능 트랙 한정판인 머스탱 다크호스(Mustang Dark Horse) 및 최첨단 레이싱 기술이 가미되어 약 4억 원대 이상의 최고가 요금 수준을 나타내는 머스탱 GTD 같은 종류의 라인업은 포드코리아 정식출시 대상에서 제외되었습니다. 하지만 이베이 경매나 병행수입 전문 업체를 통해 신규 가입을 타진하는 예비 오너들의 상담 및 컨설팅 요청이 끊임없이 접수되고 있습니다.
+    </div>
+
+    <p>기본적으로 공식 사이트상에 기재된 가격 대비 실제 출고 단계에서는 각 딜러사의 전용 프로모션 할인 혜택이나 특수 금융 지원금, 그리고 비공식 현금지원 요율이 더해져 실제 결제하게 되는 금액 수준은 대리점 및 견적 신청 시점별로 미세한 차이점을 보여줍니다. 따라서 싼곳이나 저렴한곳, 최저가 성지를 찾아내기 위해서는 온라인 다이렉트 견적 사이트의 다양한 좌표 정보를 상호 대조해 보는 작업이 무엇보다 중요합니다.</p>
+
+    <h2 id="section2">2. 7세대 올뉴머스탱 주요 제원 및 스펙 차이점</h2>
+
+    <p>포드 머스탱 7세대 풀체인지 모델을 선택할 때 예비 구매자가 가장 치열하게 고민하는 지점은 다름 아닌 파워트레인의 종류입니다. 2.3 에코부스트 터보 엔진과 5.0 GT 코요테 V8 자연흡기 엔진은 엔진 사운드, 가속 질감, 세금 체계 등 다방면에서 극명한 차이점을 드러내기 때문입니다.</p>
+
+    <h3>2-1. 2.3 에코부스트 프리미엄: 실용성과 뛰어난 가성비의 조화</h3>
+    <p>직렬 4기통 2.3L 트윈스크롤 에코부스트 터보 엔진을 장착한 2.3 Premium 트림은 최고출력 319마력, 최대토크 48.0kg.m의 준수한 주행력을 선사합니다. 복합 연비가 리터당 9.6km 수준으로 스포츠카 종류 중에서는 비교적 효율적인 연간 유류비 통계를 보여주며, 저공해자동차 3종 혜택을 받을 수 있어 공영주차장 및 공항 주차장 할인 혜택까지 제공됩니다. 데일리 스포츠카 형태로 매일 출퇴근길을 소화해야 하는 오너들에게 가장 높은 추천 순위로 꼽히는 합리적인 선택지입니다.</p>
+
+    <h3>2-2. 5.0 GT 프리미엄: 아메리칸 V8 자연흡기 날것의 감성</h3>
+    <p>포드 머스탱의 진정한 가치는 V8 대배기량 고유의 엔진 사운드에서 나온다는 마니아들의 주장이 과장이 아님을 입증하는 모델입니다. 최고출력 493마력과 최대토크 57.0kg.m의 무시무시한 폭발력을 내뿜는 4세대 코요테 V8 자연흡기 엔진은 정지 상태에서 가속페달을 밟았을 때 가슴을 울리는 배기음을 뿜어냅니다. 7세대 머스탱에 적용된 액티브 밸브 배기 시스템을 컨트롤하면 무소음 모드부터 트랙 모드까지 다양한 모드로 변경이 가능합니다. 다이내믹한 서킷 레이싱 퍼포먼스를 완성하는 마그네라이드 댐핑 시스템과 드리프트 브레이크, 라인 락 기능 등의 주행 제어 특수 장비가 기본 제공됩니다.</p>
+
+    <div class="graph-container">
+      <h4>2026 포드 머스탱 모델별 공식 출시 가격 시각화 (단위: 만 원)</h4>
+      <div class="bar-wrapper">
+        <div class="bar-label">
+          <span>2.3 에코부스트 프리미엄 쿠페</span>
+          <span>6,010만 원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width: 60.1%;"></div>
+        </div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">
+          <span>2.3 에코부스트 프리미엄 컨버터블</span>
+          <span>6,720만 원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width: 67.2%;"></div>
+        </div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">
+          <span>5.0 GT 프리미엄 쿠페 스탠다드</span>
+          <span>8,010만 원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width: 80.1%;"></div>
+        </div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">
+          <span>5.0 GT 프리미엄 컨버터블 스탠다드</span>
+          <span>8,630만 원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width: 86.3%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <p>내부 인테리어 역시 대대적인 풀체인지를 거쳤습니다. 전투기 조종석에서 영감을 받아 12.4인치 고해상도 디지털 계기판과 13.2인치 중앙 센터스택 디스플레이가 매끄럽게 연결된 커브드 모니터를 중심으로 설계되었습니다. 포드 최신 인포테인먼트 시스템인 싱크4(Sync 4)가 기본 내장되어 있으며 플랫바텀 스티어링 휠로 한층 스포티한 손맛을 경험할 수 있습니다. 수입차 딜러십 전문 업체들의 상담 채널을 거치면 두 사양의 시승 차종이 전시장에 상시 비치되어 있으니 신뢰할 수 있는 매장에서 무상 시승 신청을 해보시기를 강력 추천합니다.</p>
+
+    <h2 id="section3">3. 월 유지비 및 연간 자동차세 상세 계산 비교</h2>
+
+    <p>포드 머스탱 신차 가입 혹은 리스 장기렌트 계약 전에 꼼꼼히 체크해 보아야 하는 항목이 있습니다. 바로 고유가 시대에 직면한 수입차 소유주들이 매달 고정적으로 부담해야 하는 유류비, 세금, 자차 보험 요금 등 누적 유지비 금액입니다. 2.3 에코부스트와 5.0 GT는 엔진 배기량과 효율 차이로 인해 연간 누적 비용에서 매우 드라마틱한 편차를 발생시킵니다.</p>
+
+    <h3>3-1. 엔진 라인업별 자동차세 세액 비교</h3>
+    <p>대한민국의 현행 지방세법상 자동차세는 전적으로 배기량을 기준으로 부과됩니다. 2.3L 에코부스트 프리미엄 트림의 실제 엔진 배기량은 2261cc이며, 이에 따른 연간 부과 세금은 교육세를 포함하여 약 587,860 원 수준입니다. 반면 5.0L GT 프리미엄 트림의 배기량은 무려 5038cc에 해당하므로, 1년에 부담하게 되는 자동차세 세액만 무려 1,310,000 원에 가깝게 계산됩니다. 단순히 연간 소유 세금 차이점만 하더라도 배 이상 차이나게 되는 셈입니다.</p>
+
+    <h3>3-2. 유류비 평균 금액 분석 (연간 15,000km 주행 기준)</h3>
+    <p>한국 석유공사 오피넷에 공시된 국내 평균 휘발유 소매 요금을 리터당 1,650 원으로 가정한 뒤, 복합 공인 연비를 매칭하여 연간 예상 유류비를 직관적으로 산출해 보겠습니다.</p>
+    <ul>
+      <li>2.3 에코부스트 (복합 연비 9.6km/L): 연 주행거리 15,000km 환산 시 약 1,562.5 리터의 연료 소비가 필요하며, 연간 총액은 약 2,578,125 원 (월 평균 약 21만 원대)으로 도출됩니다.</li>
+      <li>5.0 GT (복합 연비 7.2km/L): 동일하게 연 15,000km 운행 시 약 2,083.3 리터의 주유가 이루어지며, 총 유류 대금은 3,437,500 원 (월 평균 약 28만 원대) 이상으로 환산됩니다. 고출력 스포츠 쿠페의 특성상 고급 휘발유 주유를 고집하게 될 경우 체감 비용 격차는 더욱 대폭 커질 수 있습니다.</li>
+    </ul>
+
+    <div class="graph-container">
+      <h4>연간 유류비 예상 비용 비교 (연 15,000km 주행, 휘발유 1,650원 기준, 단위: 원)</h4>
+      <div class="bar-wrapper">
+        <div class="bar-label">
+          <span>2.3 에코부스트 Premium (복합연비 9.6km/L)</span>
+          <span>2,578,125 원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width: 56.2%; background-color: #a3b899;"></div>
+        </div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">
+          <span>5.0 GT Premium (복합연비 7.2km/L)</span>
+          <span>3,437,500 원</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width: 75%; background-color: #fca5a5;"></div>
+        </div>
+      </div>
+    </div>
+
+    <p>여기에 스포츠카 전용 다이렉트 자동차보험료 가입 비용을 포함하여 소모품 교환 비용까지 정밀 산출하면 실질적인 소유 비용 차이는 더욱 정밀해집니다. 아래에 자체 설계된 신차 가상 견적 및 유지 관리 계산기를 통하여 개인별 예상 금액을 확인해 보실 수 있습니다.</p>
+
+    <h2 id="section4">4. 포드 머스탱 신차 구매 비용 가상 견적 계산기</h2>
+
+    <p>아래 입력창에 원하시는 조건과 할인 내역을 기입하면 다이렉트 신규 출고 시 적용되는 취등록 세액 및 각종 공채 매입 요율이 반영된 최종 인도 금액이 간편하게 연산됩니다. 다양한 매칭 값을 입력하여 실시간 가상 비교 시뮬레이션을 진행해 보세요.</p>
+
+    <div class="form-section">
+      <h3>머스탱 7세대 신차 견적 계산기</h3>
+      <p>트림 선택 및 할인 정보를 조정하여 최종 등록 비용을 확인하십시오.</p>
+      <form id="car_quote_form">
+        <label for="trim_select">머스탱 세부 트림 선택</label>
+        <select id="trim_select">
+          <option value="60100000">2.3 에코부스트 프리미엄 쿠페 (6,010만 원)</option>
+          <option value="67200000">2.3 에코부스트 프리미엄 컨버터블 (6,720만 원)</option>
+          <option value="80100000">5.0 GT 프리미엄 쿠페 스탠다드 (8,010만 원)</option>
+          <option value="86300000">5.0 GT 프리미엄 컨버터블 스탠다드 (8,630만 원)</option>
+        </select>
+
+        <label for="input_discount">프로모션 및 대리점 특별 할인 금액 (만원 단위 입력)</label>
+        <input type="number" id="input_discount" value="200" min="0" placeholder="예: 250">
+
+        <button type="button" onclick="calculateNewCarQuote()" class="cta-button">실구매 예상 견적 요금 도출하기</button>
+      </form>
+      <div id="quote_result_box" class="result-box" style="display: none;"></div>
+    </div>
+
+    <div class="form-section">
+      <h3>월간 할부 납부금 및 유지 관리 요금제 계산기</h3>
+      <p>차량 대출 원금과 주행 거리를 바탕으로 월 고정 지출을 미리 연산해 보세요.</p>
+      <form id="maintenance_form">
+        <label for="loan_principal">인도금(선납금) 제외 대출 할부 원금 (만원 단위)</label>
+        <input type="number" id="loan_principal" value="4000" min="0" placeholder="예: 4500">
+
+        <label for="installment_period">할부 및 대출 개월 수 선택</label>
+        <select id="installment_period">
+          <option value="12">12개월</option>
+          <option value="24">24개월</option>
+          <option value="36" selected>36개월</option>
+          <option value="48">48개월</option>
+          <option value="60">60개월</option>
+        </select>
+
+        <label for="interest_rate">적용 금융 이자 요율 (%)</label>
+        <input type="number" id="interest_rate" value="5.8" step="0.1" min="0" placeholder="예: 5.5">
+
+        <label for="annual_mileage">연간 예상 도로 주행 거리 (km)</label>
+        <input type="number" id="annual_mileage" value="15000" min="0" placeholder="예: 12000">
+
+        <label for="fuel_type_select">차량 탑재 엔진 사양</label>
+        <select id="fuel_type_select">
+          <option value="9.6">2.3 에코부스트 (복합 연비 9.6km/L)</option>
+          <option value="7.2">5.0 GT 자연흡기 (복합 연비 7.2km/L)</option>
+        </select>
+
+        <button type="button" onclick="calculateMaintenance()" class="cta-button">매월 예상 소요 비용 연산하기</button>
+      </form>
+      <div id="maintenance_result_box" class="result-box" style="display: none;"></div>
+    </div>
+
+    <script>
+      function mult(a, b) {
+        return a / (1 / b);
+      }
+
+      function calculateNewCarQuote() {
+        var basePrice = parseFloat(document.getElementById('trim_select').value);
+        var discountMan = parseFloat(document.getElementById('input_discount').value);
+        var discountWon = mult(discountMan, 10000);
+        
+        var netPrice = basePrice - discountWon;
+        if (netPrice < 0) netPrice = 0;
+
+        var taxRate = 0.07;
+        var acquisitionTax = mult(netPrice, taxRate);
+        var bondDiscountRate = 0.015;
+        var publicBond = mult(netPrice, bondDiscountRate);
+        var agencyFee = 450000; 
+
+        var finalCost = netPrice + acquisitionTax + publicBond + agencyFee;
+
+        var box = document.getElementById('quote_result_box');
+        box.style.display = 'block';
+        box.innerHTML = '<h4>신차 취득 및 총 등록 요금 가상 명세표</h4>' +
+                        '<p>기본 차량 출고가: ' + basePrice.toLocaleString() + ' 원</p>' +
+                        '<p>프로모션 차감 금액: -' + discountWon.toLocaleString() + ' 원</p>' +
+                        '<p>할인 적용 실 차량 가격: ' + netPrice.toLocaleString() + ' 원</p>' +
+                        '<p>취등록 세액 (7%): 약 ' + Math.round(acquisitionTax).toLocaleString() + ' 원</p>' +
+                        '<p>공채 할인 요금 부담분: 약 ' + Math.round(publicBond).toLocaleString() + ' 원</p>' +
+                        '<p>등록 대행 및 번호판, 탁송 기본 요금: ' + agencyFee.toLocaleString() + ' 원</p>' +
+                        '<p class="highlight" style="background-color: #eff6ff; border-left-color: #3b82f6; color: #1e40af; font-style: normal; margin-top: 15px;">' +
+                        '<strong>최종 인수 예상 금액 합계:</strong> 약 ' + Math.round(finalCost).toLocaleString() + ' 원' +
+                        '</p>';
+      }
+
+      function calculateMaintenance() {
+        var principalMan = parseFloat(document.getElementById('loan_principal').value);
+        var period = parseFloat(document.getElementById('installment_period').value);
+        var rate = parseFloat(document.getElementById('interest_rate').value) / 100;
+        var mileage = parseFloat(document.getElementById('annual_mileage').value);
+        var economy = parseFloat(document.getElementById('fuel_type_select').value);
+
+        var principalWon = mult(principalMan, 10000);
+
+        var totalInterest = mult(mult(principalWon, rate), period / 12);
+        var monthlyInstallment = (principalWon + totalInterest) / period;
+
+        var monthlyFuelCost = mult(mileage / economy, 1650) / 12;
+
+        var monthlyTax = 48980;
+        if (economy < 8) {
+          monthlyTax = 109160; 
+        }
+
+        var monthlyInsurance = 135000; 
+
+        var totalMonthlyCost = monthlyInstallment + monthlyFuelCost + monthlyTax + monthlyInsurance;
+
+        var box = document.getElementById('maintenance_result_box');
+        box.style.display = 'block';
+        box.innerHTML = '<h4>월간 예상 할부금 및 유지 비용 분석표</h4>' +
+                        '<p>월 납부 할부 상환금: 약 ' + Math.round(monthlyInstallment).toLocaleString() + ' 원</p>' +
+                        '<p>월 예상 정기 주유 요금: 약 ' + Math.round(monthlyFuelCost).toLocaleString() + ' 원</p>' +
+                        '<p>월 평균 자동차 지분 세액: 약 ' + Math.round(monthlyTax).toLocaleString() + ' 원</p>' +
+                        '<p>월 평균 자동차 다이렉트 보험료: 약 ' + Math.round(monthlyInsurance).toLocaleString() + ' 원</p>' +
+                        '<p class="highlight" style="background-color: #f0fdf4; border-left-color: #22c55e; color: #15803d; font-style: normal; margin-top: 15px;">' +
+                        '<strong>예상 고정 월 요금 총액:</strong> 약 ' + Math.round(totalMonthlyCost).toLocaleString() + ' 원' +
+                        '</p>';
+      }
+    </script>
+
+    <h2 id="section5">5. 일시불 vs 리스 vs 장기렌트 구매 방법별 장단점 및 혜택 비교</h2>
+
+    <p>수입 명품 머슬카인 머스탱 7세대 신차를 구입하기 위한 금융 조달 방법으로는 전통적인 일시불 캐시백 일시 결제 방식 외에도, 운용 리스 방식과 신차 장기렌트 상품권 혜택 프로그램 등 여러 다채로운 운용 요금제 제도가 존재합니다. 각기 다른 장단점과 차이점이 뚜렷하게 존재하기 때문에 가입자의 세무 환경과 목적에 맞춰 철저한 컨설팅을 받는 것이 권장됩니다.</p>
+
+    <h3>5-1. 운용 리스(Lease): 자산 노출 없는 우아한 운용</h3>
+    <p>개인사업자 및 법인 전문 대표님들이 머스탱을 출고할 때 가장 많이 애용하는 방법이 바로 운용 리스 요금제입니다. 월 리스료 전액을 연간 최대 1,500만 원 한도 내에서 손비 처리할 수 있어 법인세 및 종합소득세 감면 면에서 엄청난 장점을 나타냅니다. 금융 리스와 달리 차량이 이용자의 개인 자산으로 등록되지 않아 건강보험료 상승 압박과 각종 재산세 할증 피해를 고스란히 예방해 줍니다. 번호판 또한 일반 승용차와 동일하게 교부되므로 렌터카 전용 번호판(하, 허, 호) 부착을 기피하는 스포츠카 고유의 감성적 단점을 말끔히 해결할 수 있습니다.</p>
+
+    <h3>5-2. 신차 장기렌트(Long-term Rent): 정비 리스크 제로의 편안함</h3>
+    <p>차량 관리 업무 및 자차 사고 보험 처리와 관련된 복잡한 절차를 대폭 생략하고 싶다면 장기렌트가 최적의 솔루션이 될 수 있습니다. 매달 지불하는 이용료 내에 차량 세금, 자동차 종합 보험 요금, 취등록 원금 등 모든 부대 요금이 일괄 포함되어 지출 예측이 쉽습니다. 특히 주행 경력이 짧아 높은 스포츠카 보험료 산정을 두려워하는 신규 젊은 오너들의 경우, 렌트사 다이렉트 단체 요율의 종합 보험 혜택이 탑재되어 개인 과실 사고가 반복 발생하더라도 개인 보험 등급 할증 위협에서 완벽히 자유로울 수 있습니다. 다만, 앞서 언급한 하, 허, 호 번호판을 사용해야만 한다는 장단점은 사전에 명확히 인지하고 가입을 판단해야 합니다.</p>
+
+    <div class="form-section">
+      <h3>머스탱 구매 방식별 개인 맞춤 금융 운용 비교 분석기</h3>
+      <p>본인의 목적과 비즈니스 조건에 최적화된 운용 요금제를 매칭하여 확인해 보십시오.</p>
+      <form id="compare_purchase_form">
+        <label for="ownership_period">예상 차량 보유 기간 선택</label>
+        <select id="ownership_period">
+          <option value="36">3년 (36개월)</option>
+          <option value="60" selected>5년 (60개월)</option>
+        </select>
+
+        <label for="business_tax_select">개인 또는 법인 비즈니스 사업자 유무</label>
+        <select id="business_tax_select">
+          <option value="yes">개인/법인 사업자 (종합소득세 및 법인세 경비 처리 요건 대상)</option>
+          <option value="no">일반 개인 구매자 (재산 보유 및 신용 할부 위주 비교)</option>
+        </select>
+
+        <button type="button" onclick="calculatePurchaseComparison()" class="cta-button">금융 상품 운용 분석 결과 도출</button>
+      </form>
+      <div id="compare_result_box" class="result-box" style="display: none;"></div>
+    </div>
+
+    <script>
+      function calculatePurchaseComparison() {
+        var business = document.getElementById('business_tax_select').value;
+        var box = document.getElementById('compare_result_box');
+        box.style.display = 'block';
+
+        var rec = '';
+        var details = '';
+
+        if (business === 'yes') {
+          rec = '종합 운용 리스 및 법인 전용 렌트 프로그램을 강력 추천합니다.';
+          details = '사업자 명의로 차량을 출고하실 경우 월 리스료 손비 인정을 활용하여 합법적인 고액의 절세 혜택을 누릴 수 있습니다. 임원 전용 보험 적용 시 임직원 보장도 동시 충족하며, 리스 만기 도래 시 차량 감가 추이를 종합 검토하여 반납 혹은 소유권 이전 인수를 탄력적으로 선택하는 것이 최고가 자산 운용에 유리합니다.';
+        } else {
+          rec = '다이렉트 카드사 스마트 일시불 결제 및 특판 우대 저금리 할부 요금제를 우선 추천합니다.';
+          details = '개인 고객의 경우 불필요한 금융 중개 대행 수수료 지출을 예방하기 위해 자체 오토캐시백 조건이 연계된 카드 일시불이나 1금융권 은행 제휴 오토론을 경유하시는 편이 실구매 총액을 극적으로 줄이는 제일 효율적인 방법입니다. 다만 정비 대안 서비스나 초보 운전 기간 자차 보험 할증 위협을 비켜 가고자 하신다면 렌터카 이용 요금을 상세 검토해 보는 것도 좋습니다.';
+        }
+
+        box.innerHTML = '<h4>맞춤 금융 컨설팅 분석 결과</h4>' +
+                        '<p class="highlight" style="background-color: #eff6ff; border-left-color: #3b82f6; color: #1e40af; font-style: normal; margin-bottom: 12px;">' +
+                        '<strong>권장 선택:</strong> ' + rec +
+                        '</p>' +
+                        '<p>' + details + '</p>' +
+                        '<p style="margin-top: 15px; font-size: 0.9em; color: #64748b;">' +
+                        '주의: 본 분석 가이드는 가상 분석 데이터를 기반으로 연산되며 개인의 소득 요건 및 금융 시장 할인 변동에 따라 정확한 최종 비용 요금 수준은 전문 제휴 금융사 무료 상담 신청 및 실시간 승인 접수를 통하여 재확인 하셔야 합니다.' +
+                        '</p>';
+      }
+    </script>
+
+    <h2 id="section6">6. 온라인 커뮤니티 실제 차주 내돈내산 출고 후기 분석 및 결론</h2>
+
+    <p>차량의 가치를 논할 때 가장 신뢰할 수 있는 소스는 다름 아닌 실제 비용을 치르고 차량을 오랜 기간 운행 중인 오너들의 실제 후기 및 평가 데이터입니다. 국내 주요 자동차 웹 포털 및 대형 마니아 커뮤니티인 디시인사이드 차갤, 보배드림 국산/수입차 게시판, 펨코 및 에펨코리아 자동차 포럼 등에서 공유되고 있는 최신 올뉴머스탱 라이브 후기 내용을 일목요연하게 묶어 전달합니다.</p>
+
+    <h3>6-1. 커뮤니티 중심의 입소문과 주요 평판</h3>
+    <p>머스탱 7세대 풀체인지 오너들이 전하는 장단점 피드백 중 가장 지배적인 호평은 전율이 흐를 정도로 화려하게 변경된 풀 디지털 패널 디자인과 롱 노즈 숏 데크 디자인 비율입니다. 전면의 삼분할 주간주행등과 역동적인 프런트 마스크는 차주들에게 엄청난 시각적 하차감을 느끼게 해준다는 평가가 압도적입니다. 5.0 GT 자연흡기 엔진 사운드의 경우, 타 브랜드 6기통 터보 차종들과는 전혀 다른 클래스의 감성을 충족시켜 주며 보배드림 및 디시 유저들 사이에서 아메리칸 포니카의 절대적 기준으로 연일 추천글이 등록되고 있습니다.</p>
+
+    <p>반면 지적받는 일관된 단점으로는 2열 뒷좌석 탑승 공간의 협소함입니다. 쿠페나 컨버터블 모델 특성상 성인이 2열 좌석에 온전히 장거리 동승하기에는 천장 높이와 레그룸 한계가 명확하여 패밀리카 용도로써는 제약이 극심하다는 단점이 지적됩니다. 또한 시내 출퇴근 정체 구간 주행이 누적될 경우, 5.0 GT 모델 기준으로 실 주행 연비가 리터당 5km대로 급감하여 데일리 운행 시 고비용 부담이 가중될 수 있다는 현실적인 단점 및 실 구매 오너들의 내돈내산 조언도 꾸준히 찾아볼 수 있습니다.</p>
+
+    <h3 id="section7">7. 공식 외부 신뢰성 자료 참고 정보</h3>
+    <p>본 포스팅에서 다뤄진 제원 요율, 제조사 세액 기준, 트림 정보 등은 신뢰할 수 있는 공식 공인 행정 기관의 최신 지표와 검증된 지식 정보를 정밀 모니터링하여 공정하게 편집되었습니다. 신차 출고에 앞서 한층 더 전문적인 정비 사양서나 법률적인 취등록 요금 및 수입차 감가 정보 검토를 원하는 예비 차주분들은 아래 공식 사이트를 클릭하여 참조하시기 바랍니다.</p>
+
+    <div class="external-links">
+      <p><strong>참고 및 신뢰성 검증 자료 출처:</strong></p>
+      <a href="https://directnchecky.koreahankang.com" target="_blank">2026 포드 머스탱 세부 가격 및 제원 분석 시스템</a>
+      <a href="https://namu.wiki/w/%ED%8F%AC%EB%93%9C%20%EB%A8%B8%EC%8A%A4%ED%83%B1/7%EC%84%B8%EB%8C%80" target="_blank">나무위키 포드 머스탱 7세대 상세 기술 문서</a>
+      <a href="https://www.ford.co.kr" target="_blank">포드코리아 공식 수입원 홈페이지</a>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="https://analysis.reliabledone.com/mustang-price-2026" class="cta-button" style="background-color: #10b981;">무료 1대1 가격 견적 및 프로모션 안내 요청하기</a>
+    </div>
+  </div>
+  
